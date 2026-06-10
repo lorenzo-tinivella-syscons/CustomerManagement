@@ -1,0 +1,165 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0",
+    "title" : "Customer",
+    "description" : "Customer service"
+  },
+  "host" : "localhost:8080",
+  "basePath" : "/",
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/customer" : {
+      "post" : {
+        "summary" : "postCustomer",
+        "description" : "postCustomer",
+        "operationId" : "post-customer",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "",
+          "schema" : {
+            "$ref" : "#/definitions/CustomerPostRequest"
+          },
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "a ResponseMessage to be returned",
+            "schema" : {
+              "$ref" : "#/definitions/ResponseMessage"
+            },
+            "headers" : { }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "schema" : {
+              "type" : "string"
+            }
+          },
+          "409" : {
+            "description" : "Conflict",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "get" : {
+        "summary" : "getCustomer",
+        "description" : "getCustomer",
+        "operationId" : "get-customer",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "TierDescription",
+          "in" : "query",
+          "description" : "",
+          "type" : "string",
+          "required" : false
+        }, {
+          "name" : "Surname",
+          "in" : "query",
+          "description" : "",
+          "type" : "string",
+          "required" : false
+        }, {
+          "name" : "Name",
+          "in" : "query",
+          "description" : "",
+          "type" : "string",
+          "required" : false
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "a CustomerList to be returned",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/CustomerList",
+                "uniqueItems" : false
+              }
+            },
+            "headers" : { }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "schema" : {
+              "type" : "string"
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "Customer" : {
+      "type" : "object",
+      "required" : [ "TierDescription", "PhoneNumber", "Surname", "CreateDate", "Name" ],
+      "properties" : {
+        "Name" : {
+          "type" : "string"
+        },
+        "Surname" : {
+          "type" : "string"
+        },
+        "PhoneNumber" : {
+          "type" : "string"
+        },
+        "TierDescription" : {
+          "type" : "string"
+        },
+        "CreateDate" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CustomerPostRequest" : {
+      "type" : "object",
+      "required" : [ "TierDescription", "PhoneNumber", "Surname", "Name" ],
+      "properties" : {
+        "Name" : {
+          "type" : "string"
+        },
+        "Surname" : {
+          "type" : "string"
+        },
+        "PhoneNumber" : {
+          "type" : "string"
+        },
+        "TierDescription" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ResponseMessage" : {
+      "type" : "object",
+      "required" : [ "Message" ],
+      "properties" : {
+        "Message" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CustomerList" : {
+      "type" : "object",
+      "properties" : {
+        "Customer" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Customer",
+            "uniqueItems" : false
+          }
+        }
+      }
+    }
+  }
+}

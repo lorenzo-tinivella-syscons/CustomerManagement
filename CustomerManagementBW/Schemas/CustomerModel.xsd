@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/CustomerModel" xmlns:tns="http://www.example.org/CustomerModel" elementFormDefault="qualified">
+
+    <complexType name="CustomerType">
+    	<sequence>
+    		<element name="Name" type="string"></element>
+    		<element name="Surname" type="string"></element>
+    		<element name="PhoneNumber" type="string"></element>
+    		<element name="TierDescription" type="string"></element>
+    		<element name="CreateDate" type="string"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CustomerPostRequestType">
+    	<sequence>
+    		<element name="Name" type="string"></element>
+    		<element name="Surname" type="string"></element>
+    		<element name="PhoneNumber" type="string"></element>
+    		<element name="TierDescription" type="string"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CustomerListType">
+    	<sequence>
+    		<element name="Customer" type="tns:CustomerType" maxOccurs="unbounded" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+
+    <element name="Customer" type="tns:CustomerType"></element>
+
+
+    <element name="CustomerList" type="tns:CustomerListType"></element>
+
+    <element name="CustomerPostRequest"
+    	type="tns:CustomerPostRequestType">
+    </element>
+
+    <element name="ResponseMessage" type="tns:ResponseMessageType"></element>
+    
+    <complexType name="ResponseMessageType">
+    	<sequence>
+    		<element name="Message" type="string"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="ResponseMessageArrayType">
+    	<sequence>
+    		<element name="ResponseMessage" type="tns:ResponseMessageType" maxOccurs="unbounded" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+</schema>

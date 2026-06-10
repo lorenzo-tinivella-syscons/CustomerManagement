@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:rest="http://xsd.tns.tibco.com/bw/models/binding/rest" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scact="http://xsd.tns.tibco.com/amf/models/sca/componentType" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmi:id="_d6z_gGSfEfGhkLBt_rkUcw" targetNamespace="http://tns.tibco.com/bw/composite/CustomerManagementBW" name="CustomerManagementBW" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:service xmi:id="_htSOwGSjEfGhkLBt_rkUcw" name="customer" promote="ComponentCustomer/customer">
+    <sca:interface.wsdl xmi:id="_htd08GSjEfGhkLBt_rkUcw" interface="http://xmlns.example.com/20260610100812PLT#wsdl.interface(customer)" scaext:wsdlLocation="../Processes/customermanagementbw1/Customer.bwp"/>
+    <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_htwI0GSjEfGhkLBt_rkUcw" name="RestService" path="/customer" docBasePath="http://localhost:7777/CustomerManagementBW" docResourcePath="Customer" basePath="/" connector="customermanagementbw1.Customer" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/customermanagementbw1.Customer-Customer.json">
+      <operation xmi:id="_htxW8GSjEfGhkLBt_rkUcw" operationName="post" nickname="post-customer" httpMethod="POST" notes="postCustomer" responseStyle="element" requestStyle="element" outputPartName="item">
+        <responseStatus xmi:id="_Ls1_8GSvEfGhkLBt_rkUcw" statusCode="200" reasonPhrase="OK" dataType="string"/>
+        <responseStatus xmi:id="_L3rW8GSvEfGhkLBt_rkUcw" statusCode="400" reasonPhrase="Bad Request" dataType="string"/>
+        <responseStatus xmi:id="_MJKIgGSvEfGhkLBt_rkUcw" statusCode="409" reasonPhrase="Conflict" dataType="string"/>
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <operation xmi:id="_htxW8WSjEfGhkLBt_rkUcw" operationName="get" nickname="get-customer" httpMethod="GET" notes="getCustomer" responseStyle="array" outputPartName="item">
+        <parameters xmi:id="_6rVq8GSnEfGhkLBt_rkUcw">
+          <parameterMapping xmi:id="_6rVq8WSnEfGhkLBt_rkUcw" parameterName="Name" parameterType="Query" dataType="string"/>
+          <parameterMapping xmi:id="_681qoGSnEfGhkLBt_rkUcw" parameterName="Surname" parameterType="Query" dataType="string"/>
+          <parameterMapping xmi:id="_7PF4QGSnEfGhkLBt_rkUcw" parameterName="TierDescription" parameterType="Query" dataType="string"/>
+        </parameters>
+        <responseStatus xmi:id="_gHsTgGSvEfGhkLBt_rkUcw" statusCode="200" reasonPhrase="OK" dataType="string"/>
+        <responseStatus xmi:id="_gMSfoGSvEfGhkLBt_rkUcw" statusCode="400" reasonPhrase="Bad Request" dataType="string"/>
+        <responseStatus xmi:id="_gQPykGSvEfGhkLBt_rkUcw" statusCode="404" reasonPhrase="Not Found" dataType="string"/>
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <parameters xmi:id="_hukBJ2SjEfGhkLBt_rkUcw"/>
+      <advancedConfig xmi:id="_htwI0WSjEfGhkLBt_rkUcw" blockingQueueSize="2147483647"/>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_htxW8mSjEfGhkLBt_rkUcw" bindingName="RestService"/>
+  </sca:service>
+  <sca:property xmi:id="_eCbDYGSfEfGhkLBt_rkUcw" name="BW.DEPLOYMENTUNIT.TYPE" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_eCbDYWSfEfGhkLBt_rkUcw" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_eCbDYmSfEfGhkLBt_rkUcw" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_eClbcGSfEfGhkLBt_rkUcw" name="BW.HOST.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_eCnQoGSfEfGhkLBt_rkUcw" name="BW.DOMAIN.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_eCnQoWSfEfGhkLBt_rkUcw" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_eCnQomSfEfGhkLBt_rkUcw" name="BW.APPSPACE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_eCq7AGSfEfGhkLBt_rkUcw" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_eCsJIGSfEfGhkLBt_rkUcw" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:component xmi:id="_htK6AGSjEfGhkLBt_rkUcw" name="ComponentCustomer" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_htK6AWSjEfGhkLBt_rkUcw" processName="customermanagementbw1.Customer"/>
+    <sca:service xmi:id="_htPygGSjEfGhkLBt_rkUcw" name="customer">
+      <sca:interface.wsdl xmi:id="_htRAoGSjEfGhkLBt_rkUcw" interface="http://xmlns.example.com/20260610100812PLT#wsdl.interface(customer)" scaext:wsdlLocation="../Processes/customermanagementbw1/Customer.bwp"/>
+    </sca:service>
+  </sca:component>
+</sca:composite>
