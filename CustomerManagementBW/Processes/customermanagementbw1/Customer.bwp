@@ -13,6 +13,8 @@
     xmlns:ns5="http://www.tibco.com/namespaces/tnt/plugins/jdbc+856dcb9f-7394-4e08-8b98-88a8a4f75a07+input"
     xmlns:ns6="http://www.tibco.com/namespaces/tnt/plugins/jdbc+856dcb9f-7394-4e08-8b98-88a8a4f75a07+output"
     xmlns:ns7="http://tns.tibco.com/bw/palette/internal/activityerror+bw.jdbc.JDBCQuery"
+    xmlns:ns8="http://tns.tibco.com/bw/palette/internal/activityerror+com.tibco.bw.core.design.process.editor.Activity_4002_Throw"
+    xmlns:ns9="http://tns.tibco.com/bw/activity/sleep/xsd"
     xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912"
     xmlns:sca-bpel="http://docs.oasis-open.org/ns/opencsa/sca-bpel/200801"
     xmlns:tibex="http://www.tibco.com/bpel/2007/extensions"
@@ -428,6 +430,18 @@
                     <element maxOccurs="1" minOccurs="0" ref="Q1:InvalidSQLTypeException"/>
                     <element maxOccurs="1" minOccurs="0" ref="Q1:DuplicatedFieldNameException"/>
                     <element maxOccurs="1" minOccurs="0" ref="Q2:ActivityTimedOutException"/>
+                </choice>
+            </complexType>
+        </schema>
+        <schema elementFormDefault="unqualified"
+            targetNamespace="http://tns.tibco.com/bw/palette/internal/activityerror+com.tibco.bw.core.design.process.editor.Activity_4002_Throw"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:Q1="http://schemas.tibco.com/bw/plugins/basic/6.0/Exceptions" xmlns:tns="http://tns.tibco.com/bw/palette/internal/activityerror+com.tibco.bw.core.design.process.editor.Activity_4002_Throw">
+            <import namespace="http://schemas.tibco.com/bw/plugins/basic/6.0/Exceptions"/>
+            <element name="ActivityErrorData" type="tns:ActivityErrorDataType"/>
+            <complexType name="ActivityErrorDataType">
+                <choice>
+                    <element maxOccurs="1" minOccurs="0" ref="Q1:DefaultFault"/>
                 </choice>
             </complexType>
         </schema>
@@ -1748,6 +1762,8 @@
 
                                     <children type="3007">
 
+                                    <eAnnotations source="Pixel"/>
+
                                     <children type="4002 com.tibco.bw.core.design.process.editor.Activity_4002_Empty">
 
                                     <children type="4017">
@@ -2248,7 +2264,8 @@
             <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
             <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
             <element href="//0/@process/@activity/@activity/@activities.0/@messages.1/@activity/@faultHandlers/@catchAll/@activity/@activity/@links/@children.0"/>
-            <bendpoints points="[25, -5, -198, 45]$[199, -45, -24, 5]" xsi:type="notation:RelativeBendpoints"/>
+            <bendpoints
+                points="[25, 0, -198, 50]$[62, 0, -161, 50]$[62, -50, -161, 0]$[199, -50, -24, 0]" xsi:type="notation:RelativeBendpoints"/>
         </edges>
         <edges
             source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.1/@children.1/@children.0/@children.0/@children.1/@children.0/@children.0/@children.1/@children.0/@children.0/@children.0"
@@ -2259,7 +2276,8 @@
             <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
             <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
             <element href="//0/@process/@activity/@activity/@activities.0/@messages.1/@activity/@faultHandlers/@catchAll/@activity/@activity/@links/@children.1"/>
-            <bendpoints points="[25, 8, -199, -67]$[200, 67, -24, -8]" xsi:type="notation:RelativeBendpoints"/>
+            <bendpoints
+                points="[25, 0, -199, -75]$[63, 0, -161, -75]$[63, 75, -161, 0]$[200, 75, -24, 0]" xsi:type="notation:RelativeBendpoints"/>
         </edges>
     </notation:Diagram>
     <tibex:NamespaceRegistry enabled="true">
@@ -2280,6 +2298,8 @@
             namespace="http://xmlns.example.com/Customer/parameters" prefix="tns5"/>
         <tibex:namespaceItem
             namespace="http://schemas.tibco.com/bw/plugins/basic/6.0/Exceptions" prefix="tns6"/>
+        <tibex:namespaceItem
+            namespace="http://tns.tibco.com/bw/activity/sleep/xsd" prefix="tns7"/>
     </tibex:NamespaceRegistry>
     <bpws:import importType="http://www.w3.org/2001/XMLSchema" namespace="http://www.example.org/CustomerModel"/>
     <bpws:import importType="http://www.w3.org/2001/XMLSchema" namespace="http://tns.tibco.com/bw/REST"/>
@@ -2330,6 +2350,10 @@
             name="Reply_Error_get_4XX-input" sca-bpel:internal="true"/>
         <bpws:variable messageType="ns:get5XXFaultMessage"
             name="Reply_Error_get_5XX-input" sca-bpel:internal="true"/>
+        <bpws:variable element="ns8:ActivityErrorData"
+            name="_error_Copy_1_Throw2" sca-bpel:internal="true"/>
+        <bpws:variable element="ns0:OptionalErrorReport"
+            name="_errorOptional" sca-bpel:internal="true"/>
     </bpws:variables>
     <bpws:extensions>
         <bpws:extension mustUnderstand="no" namespace="http://www.eclipse.org/gmf/runtime/1.0.2/notation"/>
@@ -2611,13 +2635,13 @@ matches(string($post.item/tns:PhoneNumber), '^\+?[0-9]{9,15}$') and
                                     <bpws:flow name="flow4">
                                     <bpws:links>
                                     <bpws:link
-                                    name="Empty3ToReply" tibex:linkType="SUCCESSWITHCONDITION"/>
+                                    name="Empty3ToReply_Error_get_4XX" tibex:linkType="SUCCESSWITHCONDITION"/>
                                     <bpws:link
-                                    name="Empty3ToReply1" tibex:linkType="SUCCESSWITHNOCONDITION"/>
+                                    name="Empty3ToReply_Error_get_5XX" tibex:linkType="SUCCESSWITHNOCONDITION"/>
                                     </bpws:links>
                                     <bpws:empty name="Empty3" tibex:xpdlId="37484b1a-74bc-4e00-bd0c-4fec4ff3d534">
                                     <bpws:sources>
-                                    <bpws:source linkName="Empty3ToReply">
+                                    <bpws:source linkName="Empty3ToReply_Error_get_4XX">
                                     <tibex:DesignExpression>
 
                                     <tibex:expression
@@ -2626,7 +2650,9 @@ matches(string($post.item/tns:PhoneNumber), '^\+?[0-9]{9,15}$') and
 
                                     <bpws:transitionCondition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath2.0"><![CDATA[substring($_error/MsgCode, 1, 1) = "4"]]></bpws:transitionCondition>
                                     </bpws:source>
-                                    <bpws:source linkName="Empty3ToReply1">
+                                    <bpws:source
+                                    linkName="Empty3ToReply_Error_get_5XX"
+                                    tibex:faultDetailsVar="_error" tibex:faultNameVar="FaultName">
                                     <tibex:DesignExpression>
 
                                     <tibex:expression
@@ -2651,7 +2677,7 @@ matches(string($post.item/tns:PhoneNumber), '^\+?[0-9]{9,15}$') and
                                     expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns2=&quot;http://xmlns.example.com/20260610100812PLT&quot; xmlns:tns3=&quot;http://tns.tibco.com/bw/REST&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;_error&quot;/>&#xa;    &lt;xsl:template name=&quot;Reply_Error_get_4XX-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns3:client4XXError>&#xa;            &lt;statusCode>&#xa;                &lt;xsl:value-of select=&quot;xsd:integer($_error/MsgCode)&quot;/>&#xa;            &lt;/statusCode>&#xa;            &lt;message>&#xa;                &lt;xsl:value-of select=&quot;$_error/Msg&quot;/>&#xa;            &lt;/message>&#xa;        &lt;/tns3:client4XXError>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
                                     </tibex:inputBindings>
                                     <bpws:targets>
-                                    <bpws:target linkName="Empty3ToReply"/>
+                                    <bpws:target linkName="Empty3ToReply_Error_get_4XX"/>
                                     </bpws:targets>
                                     <bpws:correlations/>
                                     </bpws:reply>
@@ -2669,7 +2695,7 @@ matches(string($post.item/tns:PhoneNumber), '^\+?[0-9]{9,15}$') and
                                     expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns2=&quot;http://xmlns.example.com/20260610100812PLT&quot; xmlns:tns3=&quot;http://tns.tibco.com/bw/REST&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;_error&quot;/>&#xa;    &lt;xsl:template name=&quot;Reply_Error_get_5XX-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns3:server5XXError>&#xa;            &lt;statusCode>&#xa;                &lt;xsl:value-of select=&quot;if (string($_error/MsgCode) != '') then xsd:integer($_error/MsgCode) else 500&quot;/>&#xa;            &lt;/statusCode>&#xa;            &lt;message>&#xa;                &lt;xsl:value-of select=&quot;$_error/Msg&quot;/>&#xa;            &lt;/message>&#xa;        &lt;/tns3:server5XXError>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
                                     </tibex:inputBindings>
                                     <bpws:targets>
-                                    <bpws:target linkName="Empty3ToReply1"/>
+                                    <bpws:target linkName="Empty3ToReply_Error_get_5XX"/>
                                     </bpws:targets>
                                     <bpws:correlations/>
                                     </bpws:reply>
